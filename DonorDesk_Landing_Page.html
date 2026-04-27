@@ -1,0 +1,1020 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DonorDesk — Donor Tracking Built for New and Small Nonprofits</title>
+<meta name="description" content="Simple, powerful donor tracking for new and small nonprofits — built by a development director who needed exactly this and couldn't find it.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --navy: #0f2445;
+  --navy-mid: #1a3a6e;
+  --blue: #2563eb;
+  --gold: #c9922e;
+  --gold-lt: #fef3c7;
+  --white: #ffffff;
+  --off-white: #f9f7f4;
+  --gray-100: #f1f0ee;
+  --gray-200: #e4e2de;
+  --gray-400: #9a9590;
+  --gray-600: #5c5750;
+  --gray-900: #1c1a17;
+  --green: #1a6b4a;
+  --green-lt: #d1fae5;
+  --red: #b91c1c;
+  --red-lt: #fee2e2;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'Lato', sans-serif;
+  background: var(--off-white);
+  color: var(--gray-900);
+  overflow-x: hidden;
+}
+
+/* ── TYPOGRAPHY ── */
+h1, h2, h3, .serif { font-family: 'Playfair Display', serif; }
+
+/* ── NAV ── */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  background: rgba(15,36,69,0.97); backdrop-filter: blur(10px);
+  padding: 0 48px; height: 64px;
+  display: flex; align-items: center; justify-content: space-between;
+  border-bottom: 1px solid rgba(201,146,46,0.2);
+}
+.nav-logo {
+  font-family: 'Playfair Display', serif;
+  font-size: 22px; color: white; letter-spacing: -0.5px;
+}
+.nav-logo span { color: var(--gold); }
+.nav-links { display: flex; gap: 32px; align-items: center; }
+.nav-links a {
+  font-size: 13px; font-weight: 700; letter-spacing: 1px;
+  text-transform: uppercase; color: rgba(255,255,255,0.7);
+  text-decoration: none; transition: color 0.2s;
+}
+.nav-links a:hover { color: var(--gold); }
+.nav-cta {
+  background: var(--gold); color: var(--navy);
+  padding: 9px 22px; border-radius: 4px;
+  font-size: 13px; font-weight: 700;
+  text-decoration: none; letter-spacing: 0.5px;
+  transition: all 0.2s;
+}
+.nav-cta:hover { background: #e0a83a; transform: translateY(-1px); }
+
+/* ── HERO ── */
+.hero {
+  min-height: 100vh;
+  background: var(--navy);
+  display: flex; align-items: center;
+  position: relative; overflow: hidden;
+  padding: 120px 48px 80px;
+}
+.hero::before {
+  content: '';
+  position: absolute; inset: 0;
+  background:
+    radial-gradient(ellipse 60% 50% at 70% 50%, rgba(37,99,235,0.12) 0%, transparent 70%),
+    radial-gradient(ellipse 40% 60% at 20% 80%, rgba(201,146,46,0.08) 0%, transparent 60%);
+}
+.hero-grid {
+  max-width: 1160px; margin: 0 auto; width: 100%;
+  display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center;
+  position: relative; z-index: 1;
+}
+.hero-eyebrow {
+  display: inline-flex; align-items: center; gap: 10px;
+  background: rgba(201,146,46,0.12); border: 1px solid rgba(201,146,46,0.3);
+  padding: 6px 14px; border-radius: 2px;
+  font-size: 11px; font-weight: 700; letter-spacing: 2px;
+  text-transform: uppercase; color: var(--gold);
+  margin-bottom: 24px;
+}
+.hero h1 {
+  font-size: clamp(36px, 5vw, 58px);
+  line-height: 1.08; color: white;
+  letter-spacing: -1px; margin-bottom: 24px;
+}
+.hero h1 em { color: var(--gold); font-style: italic; }
+.hero-sub {
+  font-size: 18px; line-height: 1.7;
+  color: rgba(255,255,255,0.65);
+  margin-bottom: 40px; font-weight: 300;
+}
+.hero-sub strong { color: rgba(255,255,255,0.9); font-weight: 700; }
+.hero-actions { display: flex; gap: 14px; flex-wrap: wrap; }
+.btn-hero-primary {
+  background: var(--gold); color: var(--navy);
+  padding: 14px 32px; border-radius: 4px;
+  font-family: 'Lato', sans-serif;
+  font-size: 14px; font-weight: 700; letter-spacing: 0.5px;
+  text-decoration: none; transition: all 0.2s;
+  display: inline-flex; align-items: center; gap: 8px;
+}
+.btn-hero-primary:hover { background: #e0a83a; transform: translateY(-2px); box-shadow: 0 8px 24px rgba(201,146,46,0.3); }
+.btn-hero-secondary {
+  background: transparent; color: white;
+  padding: 14px 28px; border-radius: 4px;
+  border: 1.5px solid rgba(255,255,255,0.25);
+  font-family: 'Lato', sans-serif;
+  font-size: 14px; font-weight: 700;
+  text-decoration: none; transition: all 0.2s;
+}
+.btn-hero-secondary:hover { border-color: white; }
+.hero-proof {
+  display: flex; align-items: center; gap: 20px;
+  margin-top: 36px; padding-top: 36px;
+  border-top: 1px solid rgba(255,255,255,0.08);
+}
+.hero-proof-item { text-align: center; }
+.hero-proof-num {
+  font-family: 'Playfair Display', serif;
+  font-size: 28px; color: var(--gold); line-height: 1;
+}
+.hero-proof-label { font-size: 11px; color: rgba(255,255,255,0.5); margin-top: 4px; letter-spacing: 0.5px; }
+.hero-proof-div { width: 1px; height: 40px; background: rgba(255,255,255,0.1); }
+
+/* Hero card mockup */
+.hero-card {
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 12px; padding: 28px;
+  backdrop-filter: blur(10px);
+  animation: float 6s ease-in-out infinite;
+}
+@keyframes float { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-8px)} }
+.hc-title {
+  font-size: 11px; font-weight: 700; letter-spacing: 1.5px;
+  text-transform: uppercase; color: var(--gold);
+  margin-bottom: 20px;
+}
+.hc-kpis { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 20px; }
+.hc-kpi {
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 8px; padding: 14px;
+}
+.hc-kpi-label { font-size: 10px; color: rgba(255,255,255,0.4); letter-spacing: 0.5px; margin-bottom: 6px; }
+.hc-kpi-val { font-family: 'Playfair Display', serif; font-size: 22px; color: white; }
+.hc-kpi-val.gold { color: var(--gold); }
+.hc-kpi-val.green { color: #34d399; }
+.hc-kpi-val.red { color: #f87171; }
+.hc-alert {
+  background: rgba(185,28,28,0.15); border: 1px solid rgba(248,113,113,0.3);
+  border-radius: 6px; padding: 10px 14px;
+  font-size: 12px; color: #fca5a5;
+  display: flex; align-items: center; gap: 8px;
+  margin-bottom: 12px;
+}
+.hc-pipeline { display: flex; gap: 6px; }
+.hc-stage {
+  flex: 1; text-align: center; padding: 8px 4px;
+  border-radius: 4px; font-size: 10px; font-weight: 700;
+  letter-spacing: 0.3px;
+}
+
+/* ── SECTIONS ── */
+section { padding: 96px 48px; }
+.section-inner { max-width: 1160px; margin: 0 auto; }
+.section-label {
+  font-size: 11px; font-weight: 700; letter-spacing: 2px;
+  text-transform: uppercase; color: var(--gold);
+  margin-bottom: 14px;
+}
+.section-title {
+  font-size: clamp(28px, 3.5vw, 42px);
+  line-height: 1.12; letter-spacing: -0.5px;
+  color: var(--navy); margin-bottom: 20px;
+}
+.section-sub {
+  font-size: 17px; line-height: 1.7;
+  color: var(--gray-600); max-width: 580px;
+  font-weight: 300;
+}
+
+/* ── PROBLEM SECTION ── */
+.problem { background: white; }
+.problem-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
+.problem-list { margin-top: 36px; display: flex; flex-direction: column; gap: 16px; }
+.problem-item {
+  display: flex; gap: 14px; align-items: flex-start;
+  padding: 18px 20px; border-radius: 8px;
+  border-left: 3px solid var(--red);
+  background: var(--red-lt);
+}
+.problem-item .icon { font-size: 20px; flex-shrink: 0; margin-top: 1px; }
+.problem-item p { font-size: 14px; line-height: 1.6; color: var(--gray-600); }
+.problem-item p strong { color: var(--gray-900); }
+.solution-card {
+  background: var(--navy); border-radius: 12px;
+  padding: 40px; position: relative; overflow: hidden;
+}
+.solution-card::before {
+  content: ''; position: absolute;
+  top: -40px; right: -40px; width: 200px; height: 200px;
+  background: radial-gradient(circle, rgba(201,146,46,0.15), transparent 70%);
+  border-radius: 50%;
+}
+.solution-card h3 {
+  font-size: 26px; color: white; margin-bottom: 16px;
+}
+.solution-card p { font-size: 15px; color: rgba(255,255,255,0.65); line-height: 1.7; margin-bottom: 24px; }
+.solution-card .author {
+  display: flex; align-items: center; gap: 12px;
+  padding-top: 20px; border-top: 1px solid rgba(255,255,255,0.1);
+}
+.author-avatar {
+  width: 44px; height: 44px; border-radius: 50%;
+  background: var(--gold); display: flex; align-items: center;
+  justify-content: center; font-family: 'Playfair Display', serif;
+  font-size: 18px; color: var(--navy); font-weight: 700;
+}
+.author-info p { font-size: 13px; font-weight: 700; color: white; }
+.author-info span { font-size: 12px; color: rgba(255,255,255,0.5); }
+
+/* ── FEATURES ── */
+.features { background: var(--off-white); }
+.features-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 52px; }
+.feature-card {
+  background: white; border-radius: 10px;
+  padding: 32px; border: 1px solid var(--gray-200);
+  transition: all 0.2s; position: relative; overflow: hidden;
+}
+.feature-card:hover { transform: translateY(-4px); box-shadow: 0 12px 40px rgba(15,36,69,0.1); border-color: var(--gold); }
+.feature-card::after {
+  content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 3px;
+  background: linear-gradient(90deg, var(--navy), var(--gold));
+  transform: scaleX(0); transform-origin: left;
+  transition: transform 0.3s;
+}
+.feature-card:hover::after { transform: scaleX(1); }
+.feature-icon {
+  width: 48px; height: 48px; border-radius: 10px;
+  background: var(--navy); display: flex; align-items: center;
+  justify-content: center; font-size: 22px; margin-bottom: 20px;
+}
+.feature-card h3 { font-size: 18px; color: var(--navy); margin-bottom: 10px; }
+.feature-card p { font-size: 14px; line-height: 1.65; color: var(--gray-600); }
+.feature-tag {
+  display: inline-block; margin-top: 14px;
+  font-size: 11px; font-weight: 700; letter-spacing: 0.5px;
+  color: var(--gold); text-transform: uppercase;
+}
+
+/* ── PRICING ── */
+.pricing { background: white; }
+.pricing-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 52px; }
+.pricing-card {
+  border-radius: 12px; padding: 36px;
+  border: 2px solid var(--gray-200);
+  position: relative; transition: all 0.2s;
+}
+.pricing-card:hover { transform: translateY(-4px); }
+.pricing-card.featured {
+  border-color: var(--navy); background: var(--navy);
+  transform: scale(1.03);
+}
+.pricing-card.featured:hover { transform: scale(1.03) translateY(-4px); }
+.pricing-badge {
+  position: absolute; top: -14px; left: 50%; transform: translateX(-50%);
+  background: var(--gold); color: var(--navy);
+  padding: 4px 16px; border-radius: 20px;
+  font-size: 11px; font-weight: 700; letter-spacing: 1px;
+  text-transform: uppercase; white-space: nowrap;
+}
+.pricing-tier {
+  font-size: 12px; font-weight: 700; letter-spacing: 2px;
+  text-transform: uppercase; color: var(--gold);
+  margin-bottom: 8px;
+}
+.pricing-card.featured .pricing-tier { color: var(--gold); }
+.pricing-name {
+  font-size: 26px; color: var(--navy); margin-bottom: 6px;
+}
+.pricing-card.featured .pricing-name { color: white; }
+.pricing-price {
+  font-family: 'Playfair Display', serif;
+  font-size: 48px; color: var(--navy); line-height: 1;
+  margin-bottom: 4px;
+}
+.pricing-card.featured .pricing-price { color: white; }
+.pricing-price span { font-size: 18px; vertical-align: super; }
+.pricing-period { font-size: 13px; color: var(--gray-400); margin-bottom: 28px; }
+.pricing-card.featured .pricing-period { color: rgba(255,255,255,0.5); }
+.pricing-features { list-style: none; margin-bottom: 32px; display: flex; flex-direction: column; gap: 10px; }
+.pricing-features li {
+  display: flex; gap: 10px; align-items: flex-start;
+  font-size: 13.5px; line-height: 1.5; color: var(--gray-600);
+}
+.pricing-card.featured .pricing-features li { color: rgba(255,255,255,0.75); }
+.pricing-features li::before { content: '✓'; color: var(--green); font-weight: 700; flex-shrink: 0; margin-top: 1px; }
+.pricing-card.featured .pricing-features li::before { color: var(--gold); }
+.pricing-btn {
+  display: block; text-align: center; text-decoration: none;
+  padding: 13px; border-radius: 6px; font-weight: 700;
+  font-size: 14px; letter-spacing: 0.3px;
+  transition: all 0.2s; font-family: 'Lato', sans-serif;
+}
+.pricing-btn-outline {
+  border: 2px solid var(--navy); color: var(--navy);
+}
+.pricing-btn-outline:hover { background: var(--navy); color: white; }
+.pricing-btn-gold {
+  background: var(--gold); color: var(--navy);
+}
+.pricing-btn-gold:hover { background: #e0a83a; transform: translateY(-1px); }
+
+/* ── TESTIMONIALS / TRUST ── */
+.trust { background: var(--off-white); }
+.trust-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 52px; }
+.trust-card {
+  background: white; border-radius: 10px; padding: 28px;
+  border: 1px solid var(--gray-200);
+}
+.trust-stars { color: var(--gold); font-size: 16px; margin-bottom: 14px; letter-spacing: 2px; }
+.trust-card p { font-size: 14px; line-height: 1.7; color: var(--gray-600); font-style: italic; margin-bottom: 20px; }
+.trust-author { display: flex; align-items: center; gap: 10px; }
+.trust-av {
+  width: 38px; height: 38px; border-radius: 50%;
+  background: var(--navy); display: flex; align-items: center;
+  justify-content: center; font-family: 'Playfair Display', serif;
+  font-size: 15px; color: var(--gold);
+}
+.trust-author-info p { font-size: 13px; font-weight: 700; color: var(--gray-900); }
+.trust-author-info span { font-size: 11.5px; color: var(--gray-400); }
+
+/* ── ABOUT ── */
+.about { background: white; }
+.about-grid { display: grid; grid-template-columns: 1fr 1.4fr; gap: 80px; align-items: center; }
+.about-card {
+  background: var(--navy); border-radius: 12px; padding: 40px;
+  text-align: center;
+}
+.about-avatar {
+  width: 80px; height: 80px; border-radius: 50%;
+  background: var(--gold); display: flex; align-items: center;
+  justify-content: center; font-family: 'Playfair Display', serif;
+  font-size: 32px; color: var(--navy); margin: 0 auto 20px;
+}
+.about-card h3 { font-size: 22px; color: white; margin-bottom: 4px; }
+.about-card .role { font-size: 13px; color: var(--gold); margin-bottom: 20px; letter-spacing: 0.5px; }
+
+.about-content .section-title { margin-bottom: 20px; }
+.about-content p { font-size: 15px; line-height: 1.8; color: var(--gray-600); margin-bottom: 16px; }
+.cred-list { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 24px; }
+.cred {
+  background: var(--gray-100); border-radius: 4px;
+  padding: 6px 12px; font-size: 12px; font-weight: 700;
+  color: var(--navy); letter-spacing: 0.3px;
+}
+
+/* ── FAQ ── */
+.faq { background: var(--off-white); }
+.faq-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 52px; }
+.faq-item {
+  background: white; border-radius: 8px; padding: 28px 32px;
+  border: 1px solid var(--gray-200);
+  margin-bottom: 4px;
+}
+.faq-item h4 { font-size: 15px; font-weight: 700; color: var(--navy); margin-bottom: 10px; text-decoration: underline; text-decoration-color: var(--gold); text-underline-offset: 3px; }
+.faq-q { font-size: 15px; font-weight: 700; color: var(--navy); margin-bottom: 12px; text-decoration: underline; text-decoration-color: var(--gold); text-underline-offset: 3px; }
+.faq-a { font-size: 14px; line-height: 1.75; color: var(--gray-600); }
+.faq-item p { font-size: 14px; line-height: 1.75; color: var(--gray-600); }
+
+/* ── CTA ── */
+.cta-section {
+  background: var(--navy); padding: 96px 48px;
+  text-align: center; position: relative; overflow: hidden;
+}
+.cta-section::before {
+  content: ''; position: absolute; inset: 0;
+  background: radial-gradient(ellipse 60% 80% at 50% 50%, rgba(201,146,46,0.1), transparent 70%);
+}
+.cta-section h2 { font-size: clamp(28px, 4vw, 46px); color: white; margin-bottom: 16px; position: relative; }
+.cta-section h2 em { color: var(--gold); }
+.cta-section p { font-size: 17px; color: rgba(255,255,255,0.6); margin-bottom: 40px; position: relative; }
+.cta-actions { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; position: relative; }
+
+/* ── FOOTER ── */
+.cta-final {
+  background: var(--navy);
+  padding: 100px 48px;
+}
+.btn-cta-primary {
+  display: inline-block; background: var(--gold); color: var(--navy);
+  font-weight: 700; font-size: 15px; padding: 14px 28px;
+  border-radius: 8px; text-decoration: none;
+}
+.btn-cta-outline {
+  display: inline-block; background: transparent; color: white;
+  font-weight: 700; font-size: 15px; padding: 13px 28px;
+  border-radius: 8px; text-decoration: none;
+  border: 2px solid rgba(255,255,255,0.3);
+}
+.btn-cta-primary:hover { opacity: 0.9; }
+.btn-cta-outline:hover { border-color: var(--gold); color: var(--gold); }
+footer {
+  background: #080f1c; padding: 40px 48px;
+  display: flex; align-items: center; justify-content: space-between;
+  border-top: 1px solid rgba(255,255,255,0.05);
+}
+.footer-logo { font-family: 'Playfair Display', serif; font-size: 20px; color: white; }
+.footer-logo span { color: var(--gold); }
+.footer-links { display: flex; gap: 28px; }
+.footer-links a { font-size: 12px; color: rgba(255,255,255,0.4); text-decoration: none; letter-spacing: 0.5px; transition: color .2s; }
+.footer-links a:hover { color: var(--gold); }
+.footer-copy { font-size: 12px; color: rgba(255,255,255,0.25); }
+
+/* ── ANIMATIONS ── */
+.reveal {
+  opacity: 0; transform: translateY(24px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+.reveal.visible { opacity: 1; transform: translateY(0); }
+.reveal-delay-1 { transition-delay: 0.1s; }
+.reveal-delay-2 { transition-delay: 0.2s; }
+.reveal-delay-3 { transition-delay: 0.3s; }
+.reveal-delay-4 { transition-delay: 0.4s; }
+
+/* ── RESPONSIVE ── */
+@media(max-width: 900px) {
+  nav { padding: 0 24px; }
+  .nav-links { display: none; }
+  .hero { padding: 100px 24px 60px; }
+  .hero-grid { grid-template-columns: 1fr; gap: 48px; }
+  section { padding: 64px 24px; }
+  .problem-grid, .about-grid { grid-template-columns: 1fr; gap: 40px; }
+  .features-grid, .pricing-grid, .trust-grid { grid-template-columns: 1fr; }
+  .faq-grid { grid-template-columns: 1fr; }
+  .pricing-card.featured { transform: none; }
+  footer { flex-direction: column; gap: 20px; text-align: center; }
+  .footer-links { flex-wrap: wrap; justify-content: center; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">Donor<span>Desk</span></div>
+  <div class="nav-links">
+    <a href="#features">Features</a>
+    <a href="#pricing">Pricing</a>
+    <a href="#about">About</a>
+    <a href="#faq">FAQ</a>
+    <a href="#pricing" class="nav-cta">Get DonorDesk →</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-grid">
+    <div>
+      <div class="hero-eyebrow">Built by a real fundraiser</div>
+      <h1>Donor tracking built for <em>where your nonprofit actually is</em></h1>
+      <p class="hero-sub">
+        Most donor software is built for large development teams with big budgets.
+        DonorDesk is built for new and growing nonprofits that just need a clear, organized way to track donors, gifts, and grants — and actually use it.
+      </p>
+      <div class="hero-actions">
+        <a href="#pricing" class="btn-hero-primary">See pricing & download →</a>
+        <a href="#features" class="btn-hero-secondary">See what's inside</a>
+      </div>
+      
+    </div>
+  </div>
+</section>
+
+<!-- PROBLEM -->
+<section class="problem" id="problem">
+  <div class="section-inner">
+    <div class="problem-grid">
+      <div>
+        <div class="section-label reveal">The problem</div>
+        <h2 class="section-title reveal reveal-delay-1">New and small nonprofits are stuck between two bad options</h2>
+        <div class="problem-list">
+          <div class="problem-item reveal reveal-delay-2">
+            <div class="icon">💸</div>
+            <p><strong>Most donor software wasn't built for you.</strong> The tools designed for large development teams are complex to set up, hard to maintain, and built around workflows that don't match where a new or small nonprofit actually is.</p>
+          </div>
+          <div class="problem-item reveal reveal-delay-3">
+            <div class="icon">📊</div>
+            <p><strong>Generic spreadsheet templates don't work.</strong> Most are made by people who've never sat in a development office. They miss Last Year But Unfortunately Not This Year (LYBUNT) / Some Year But Unfortunately Not This Year (SYBUNT) tracking, moves management, grant deadlines — the things fundraisers actually need.</p>
+          </div>
+          <div class="problem-item reveal reveal-delay-4">
+            <div class="icon">🕐</div>
+            <p><strong>You're losing donors to poor tracking.</strong> Without a real system, lapsed donors go unnoticed, acknowledgment letters get missed, and grant deadlines slip.</p>
+          </div>
+        </div>
+      </div>
+      <div class="solution-card reveal">
+        <h3>There's a better way.</h3>
+        <p>DonorDesk was built by a working Development Director — not a software company. Every feature reflects what actually matters in a real development office. No bloat. No features you'll never use. No learning curve that takes three weeks.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURES -->
+<section class="features" id="features">
+  <div class="section-inner">
+    <div class="section-label reveal">What's inside</div>
+    <h2 class="section-title reveal reveal-delay-1">Everything a development office needs.<br>Nothing it doesn't.</h2>
+    <p class="section-sub reveal reveal-delay-2">Built around the actual workflow of a new or small nonprofit fundraiser — not a checklist of features nobody uses.</p>
+    <div class="features-grid">
+      <div class="feature-card reveal">
+        <div class="feature-icon">👥</div>
+        <h3>Donor Database</h3>
+        <p>Every donor relationship in one place. Auto-calculates total lifetime giving, Last Year But Unfortunately Not This Year (LYBUNT) / Some Year But Unfortunately Not This Year (SYBUNT) status, and engagement score. Filter by status, type, or relationship owner in one click.</p>
+        <div class="feature-tag">Auto-updates →</div>
+      </div>
+      <div class="feature-card reveal reveal-delay-1">
+        <div class="feature-icon">🎁</div>
+        <h3>Gift Log</h3>
+        <p>Log every donation in seconds. Tracks acknowledgment status and flags unacknowledged gifts in red — because the IRS requires written acknowledgment for gifts $250+.</p>
+        <div class="feature-tag">Color-coded alerts →</div>
+      </div>
+      <div class="feature-card reveal reveal-delay-2">
+        <div class="feature-icon">🔄</div>
+        <h3>Moves Management</h3>
+        <p>Track every donor through Identification → Qualification → Cultivation → Solicitation → Stewardship. Days-until-due calculates automatically. Overdue actions turn red.</p>
+        <div class="feature-tag">Pipeline view →</div>
+      </div>
+      <div class="feature-card reveal">
+        <div class="feature-icon">📋</div>
+        <h3>Grant Tracker</h3>
+        <p>Track every grant prospect, active award, and reporting deadline. Color-coded alerts for deadlines approaching within 14 days. Never miss a report due date again.</p>
+        <div class="feature-tag">Deadline alerts →</div>
+      </div>
+      <div class="feature-card reveal reveal-delay-1">
+        <div class="feature-icon">📊</div>
+        <h3>Board-Ready Dashboard</h3>
+        <p>All your key performance indicators (KPIs) in one printable page. Total raised YTD, retention rate, Last Year But Unfortunately Not This Year (LYBUNT) count, year-over-year (YOY) comparison, grant pipeline, priority actions. Print it before every board meeting.</p>
+        <div class="feature-tag">Print-ready →</div>
+      </div>
+      <div class="feature-card reveal reveal-delay-2">
+        <div class="feature-icon">⭐</div>
+        <h3>Engagement Scoring</h3>
+        <p>Every donor gets an A/B/C/D score based on giving frequency, recency, and amount. Tells you exactly which donors to prioritize and what action to take next.</p>
+        <div class="feature-tag">Pro version →</div>
+      </div>
+    </div>
+  </div>
+
+    <!-- ── PRODUCT PREVIEWS ── -->
+    <div style="margin-top:60px">
+      <div class="section-label reveal" style="text-align:center;margin-bottom:10px">See what you're getting</div>
+      <h3 class="reveal" style="text-align:center;font-family:'Playfair Display',serif;font-size:22px;color:var(--navy);margin-bottom:32px">A look inside each product</h3>
+
+      <!-- STARTER MOCKUP -->
+      <div class="reveal" style="background:white;border-radius:12px;border:1px solid var(--gray-200);overflow:hidden;margin-bottom:24px;box-shadow:0 4px 24px rgba(15,36,69,.08)">
+        <div style="background:var(--navy);padding:14px 20px;display:flex;align-items:center;gap:12px">
+          <div style="background:var(--gold);color:var(--navy);font-size:11px;font-weight:700;padding:3px 10px;border-radius:20px;text-transform:uppercase;letter-spacing:1px">Starter — $19</div>
+          <span style="color:rgba(255,255,255,.5);font-size:12px">Google Sheets · 2 tabs</span>
+        </div>
+        <!-- Tab bar -->
+        <div style="display:flex;border-bottom:1px solid var(--gray-200);background:#f8fafc">
+          <div style="padding:8px 16px;font-size:12px;font-weight:700;color:var(--navy);border-bottom:2px solid var(--gold);background:white">⭐ Start Here</div>
+          <div style="padding:8px 16px;font-size:12px;color:var(--gray-400)">1. Donor List</div>
+          <div style="padding:8px 16px;font-size:12px;color:var(--gray-400)">2. Gift Log</div>
+        </div>
+        <!-- Spreadsheet preview -->
+        <div style="overflow-x:auto">
+          <table style="width:100%;border-collapse:collapse;font-size:12px;min-width:640px">
+            <thead>
+              <tr style="background:var(--navy);color:white">
+                <th style="padding:8px 12px;text-align:left;font-size:10px;letter-spacing:.5px;font-weight:700">FIRST NAME</th>
+                <th style="padding:8px 12px;text-align:left;font-size:10px;letter-spacing:.5px;font-weight:700">LAST NAME</th>
+                <th style="padding:8px 12px;text-align:left;font-size:10px;letter-spacing:.5px;font-weight:700">EMAIL</th>
+                <th style="padding:8px 12px;text-align:left;font-size:10px;letter-spacing:.5px;font-weight:700">DONOR TYPE</th>
+                <th style="padding:8px 12px;text-align:left;font-size:10px;letter-spacing:.5px;font-weight:700">TOTAL GIVING</th>
+                <th style="padding:8px 12px;text-align:left;font-size:10px;letter-spacing:.5px;font-weight:700">LAST GIFT</th>
+                <th style="padding:8px 12px;text-align:left;font-size:10px;letter-spacing:.5px;font-weight:700">NOTES</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr style="background:#f9f7f4">
+                <td style="padding:7px 12px;color:var(--navy);font-weight:600">Jane</td>
+                <td style="padding:7px 12px;color:var(--navy);font-weight:600">Smith</td>
+                <td style="padding:7px 12px;color:var(--gray-500)">jsmith@email.com</td>
+                <td style="padding:7px 12px">Individual</td>
+                <td style="padding:7px 12px;color:#059669;font-weight:700">$2,500.00</td>
+                <td style="padding:7px 12px;color:var(--gray-500)">03/15/2025</td>
+                <td style="padding:7px 12px;color:var(--gray-400);font-style:italic">Prefers email contact</td>
+              </tr>
+              <tr style="background:white">
+                <td style="padding:7px 12px;color:var(--navy);font-weight:600">Robert</td>
+                <td style="padding:7px 12px;color:var(--navy);font-weight:600">Johnson</td>
+                <td style="padding:7px 12px;color:var(--gray-500)">rjohnson@corp.com</td>
+                <td style="padding:7px 12px">Corporate</td>
+                <td style="padding:7px 12px;color:#059669;font-weight:700">$10,000.00</td>
+                <td style="padding:7px 12px;color:var(--gray-500)">01/08/2025</td>
+                <td style="padding:7px 12px;color:var(--gray-400);font-style:italic">Annual event sponsor</td>
+              </tr>
+              <tr style="background:#f9f7f4">
+                <td style="padding:7px 12px;color:var(--navy);font-weight:600">Margaret</td>
+                <td style="padding:7px 12px;color:var(--navy);font-weight:600">Chen</td>
+                <td style="padding:7px 12px;color:var(--gray-500)">mchen@email.com</td>
+                <td style="padding:7px 12px">Foundation</td>
+                <td style="padding:7px 12px;color:#059669;font-weight:700">$25,000.00</td>
+                <td style="padding:7px 12px;color:var(--gray-500)">11/30/2024</td>
+                <td style="padding:7px 12px;color:var(--gray-400);font-style:italic">Board member, 3-yr donor</td>
+              </tr>
+              <tr style="background:white">
+                <td colspan="7" style="padding:6px 12px;font-size:11px;color:var(--gray-400);font-style:italic;text-align:center">+ your donors below · Total Giving and Last Gift Date auto-calculate from the Gift Log tab</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- STANDARD MOCKUP -->
+      <div class="reveal reveal-delay-1" style="background:white;border-radius:12px;border:1px solid var(--gray-200);overflow:hidden;margin-bottom:24px;box-shadow:0 4px 24px rgba(15,36,69,.08)">
+        <div style="background:var(--navy);padding:14px 20px;display:flex;align-items:center;gap:12px">
+          <div style="background:var(--gold);color:var(--navy);font-size:11px;font-weight:700;padding:3px 10px;border-radius:20px;text-transform:uppercase;letter-spacing:1px">Standard — $39</div>
+          <span style="color:rgba(255,255,255,.5);font-size:12px">Google Sheets · 5 tabs</span>
+        </div>
+        <!-- Tab bar -->
+        <div style="display:flex;border-bottom:1px solid var(--gray-200);background:#f8fafc;overflow-x:auto">
+          <div style="padding:8px 14px;font-size:12px;font-weight:700;color:var(--navy);border-bottom:2px solid var(--gold);white-space:nowrap;background:white">⭐ Start Here</div>
+          <div style="padding:8px 14px;font-size:12px;color:var(--gray-400);white-space:nowrap">1. Donor Database</div>
+          <div style="padding:8px 14px;font-size:12px;color:var(--gray-400);white-space:nowrap">2. Gift Log</div>
+          <div style="padding:8px 14px;font-size:12px;color:var(--gray-400);white-space:nowrap">3. Moves Management</div>
+          <div style="padding:8px 14px;font-size:12px;color:var(--gray-400);white-space:nowrap">4. Grant Tracker</div>
+          <div style="padding:8px 14px;font-size:12px;color:var(--gray-400);white-space:nowrap">5. Board Dashboard</div>
+        </div>
+        <!-- Moves Management preview (most visually interesting) -->
+        <div style="overflow-x:auto">
+          <table style="width:100%;border-collapse:collapse;font-size:12px;min-width:700px">
+            <thead>
+              <tr style="background:#f1f5f9">
+                <th style="padding:8px 12px;text-align:left;font-size:10px;color:var(--gray-500);font-weight:700;letter-spacing:.5px;border-bottom:1px solid var(--gray-200)">DONOR</th>
+                <th style="padding:8px 12px;text-align:left;font-size:10px;color:var(--gray-500);font-weight:700;letter-spacing:.5px;border-bottom:1px solid var(--gray-200)">STAGE</th>
+                <th style="padding:8px 12px;text-align:left;font-size:10px;color:var(--gray-500);font-weight:700;letter-spacing:.5px;border-bottom:1px solid var(--gray-200)">NEXT ACTION</th>
+                <th style="padding:8px 12px;text-align:left;font-size:10px;color:var(--gray-500);font-weight:700;letter-spacing:.5px;border-bottom:1px solid var(--gray-200)">DUE DATE</th>
+                <th style="padding:8px 12px;text-align:left;font-size:10px;color:var(--gray-500);font-weight:700;letter-spacing:.5px;border-bottom:1px solid var(--gray-200)">DAYS LEFT</th>
+                <th style="padding:8px 12px;text-align:left;font-size:10px;color:var(--gray-500);font-weight:700;letter-spacing:.5px;border-bottom:1px solid var(--gray-200)">STATUS</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr style="background:#fef2f2">
+                <td style="padding:7px 12px;font-weight:600;color:var(--navy)">Margaret Chen</td>
+                <td style="padding:7px 12px"><span style="background:#fce7f3;color:#9d174d;padding:2px 7px;border-radius:10px;font-size:10px;font-weight:700">Solicitation</span></td>
+                <td style="padding:7px 12px;color:var(--gray-600)">Schedule gift conversation</td>
+                <td style="padding:7px 12px;color:var(--gray-500)">Mar 01, 2025</td>
+                <td style="padding:7px 12px;font-weight:700;color:#dc2626">-14 days</td>
+                <td style="padding:7px 12px"><span style="background:#fee2e2;color:#dc2626;padding:2px 8px;border-radius:10px;font-size:10px;font-weight:700">⚠ Overdue</span></td>
+              </tr>
+              <tr style="background:#fefce8">
+                <td style="padding:7px 12px;font-weight:600;color:var(--navy)">Robert Johnson</td>
+                <td style="padding:7px 12px"><span style="background:#d1fae5;color:#065f46;padding:2px 7px;border-radius:10px;font-size:10px;font-weight:700">Cultivation</span></td>
+                <td style="padding:7px 12px;color:var(--gray-600)">Send impact report</td>
+                <td style="padding:7px 12px;color:var(--gray-500)">Mar 18, 2025</td>
+                <td style="padding:7px 12px;font-weight:700;color:#d97706">3 days</td>
+                <td style="padding:7px 12px"><span style="background:#fef9c3;color:#92400e;padding:2px 8px;border-radius:10px;font-size:10px;font-weight:700">⏰ Due Soon</span></td>
+              </tr>
+              <tr style="background:white">
+                <td style="padding:7px 12px;font-weight:600;color:var(--navy)">Jane Smith</td>
+                <td style="padding:7px 12px"><span style="background:#dbeafe;color:#1e40af;padding:2px 7px;border-radius:10px;font-size:10px;font-weight:700">Stewardship</span></td>
+                <td style="padding:7px 12px;color:var(--gray-600)">Thank-you call + newsletter</td>
+                <td style="padding:7px 12px;color:var(--gray-500)">Apr 01, 2025</td>
+                <td style="padding:7px 12px;font-weight:700;color:#059669">17 days</td>
+                <td style="padding:7px 12px"><span style="background:#d1fae5;color:#065f46;padding:2px 8px;border-radius:10px;font-size:10px;font-weight:700">✓ On Track</span></td>
+              </tr>
+              <tr>
+                <td colspan="6" style="padding:6px 12px;font-size:11px;color:var(--gray-400);font-style:italic;text-align:center;border-top:1px solid var(--gray-200)">Showing Moves Management tab · Red = overdue · Yellow = due this week · Green = on track</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- PRO MOCKUP -->
+      <div class="reveal reveal-delay-2" style="background:white;border-radius:12px;border:1px solid var(--gray-200);overflow:hidden;box-shadow:0 4px 24px rgba(15,36,69,.08)">
+        <div style="background:var(--navy);padding:14px 20px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px">
+          <div style="display:flex;align-items:center;gap:12px">
+            <div style="background:var(--gold);color:var(--navy);font-size:11px;font-weight:700;padding:3px 10px;border-radius:20px;text-transform:uppercase;letter-spacing:1px">Pro — $15/mo</div>
+            <span style="color:rgba(255,255,255,.5);font-size:12px">Web app · Any device · Multi-user · Cloud sync</span>
+          </div>
+          <a href="https://donordesk.gumroad.com/l/pro" target="_blank" rel="noopener" style="font-size:12px;font-weight:700;color:var(--gold);text-decoration:none">First month free →</a>
+        </div>
+
+        <!-- Sidebar + main layout simulation -->
+        <div style="display:flex;min-height:260px">
+
+          <!-- Sidebar -->
+          <div style="width:160px;flex-shrink:0;background:#0f2445;padding:14px 0;display:flex;flex-direction:column;gap:2px">
+            <div style="padding:6px 14px;font-size:10px;font-weight:700;color:rgba(255,255,255,.3);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:2px">Main</div>
+            <div style="padding:7px 14px;font-size:12px;color:rgba(255,255,255,.9);background:rgba(201,146,46,.15);border-right:3px solid #c9922e;font-weight:600">📊 Dashboard</div>
+            <div style="padding:7px 14px;font-size:12px;color:rgba(255,255,255,.5)">👥 Donors</div>
+            <div style="padding:7px 14px;font-size:12px;color:rgba(255,255,255,.5)">🎁 Gift Log</div>
+            <div style="padding:7px 14px;font-size:12px;color:rgba(255,255,255,.5)">🔄 Moves</div>
+            <div style="padding:7px 14px;font-size:12px;color:rgba(255,255,255,.5)">📋 Grants</div>
+            <div style="padding:7px 14px;font-size:12px;color:rgba(255,255,255,.5)">📈 Reports</div>
+            <div style="margin-top:auto;padding:7px 14px;font-size:12px;color:rgba(255,255,255,.5)">⚙️ Settings</div>
+            <div style="padding:7px 14px;font-size:12px;color:rgba(255,255,255,.5)">❓ Help</div>
+          </div>
+
+          <!-- Dashboard content -->
+          <div style="flex:1;padding:16px;background:#f9f7f4;overflow:hidden">
+
+            <!-- KPI groups -->
+            <div style="margin-bottom:12px">
+              <div style="font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:#94a3b8;margin-bottom:6px">Giving</div>
+              <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:8px">
+                <div style="background:white;border-radius:6px;padding:10px;border:1px solid #e2e8f0;cursor:pointer">
+                  <div style="font-size:9px;color:#64748b;margin-bottom:3px">Total Raised YTD</div>
+                  <div style="font-size:16px;font-weight:700;color:#059669">$47,250</div>
+                  <div style="font-size:9px;color:#059669">▲12% vs last year</div>
+                  <div style="font-size:8px;color:#94a3b8;margin-top:3px">View →</div>
+                </div>
+                <div style="background:white;border-radius:6px;padding:10px;border:1px solid #e2e8f0">
+                  <div style="font-size:9px;color:#64748b;margin-bottom:3px">Avg Gift (YTD)</div>
+                  <div style="font-size:16px;font-weight:700;color:#334155">$312</div>
+                  <div style="font-size:9px;color:#94a3b8">per donation</div>
+                  <div style="font-size:8px;color:#94a3b8;margin-top:3px">View →</div>
+                </div>
+                <div style="background:white;border-radius:6px;padding:10px;border:1px solid #e2e8f0">
+                  <div style="font-size:9px;color:#64748b;margin-bottom:3px">Retention Rate</div>
+                  <div style="font-size:16px;font-weight:700;color:#059669">68%</div>
+                  <div style="font-size:9px;color:#94a3b8">active / total</div>
+                  <div style="font-size:8px;color:#94a3b8;margin-top:3px">View →</div>
+                </div>
+                <div style="background:white;border-radius:6px;padding:10px;border:1px solid #e2e8f0">
+                  <div style="font-size:9px;color:#64748b;margin-bottom:3px">Lifetime Raised</div>
+                  <div style="font-size:16px;font-weight:700;color:#c9922e">$183,400</div>
+                  <div style="font-size:9px;color:#94a3b8">all time</div>
+                  <div style="font-size:8px;color:#94a3b8;margin-top:3px">View →</div>
+                </div>
+              </div>
+            </div>
+
+            <div>
+              <div style="font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:#94a3b8;margin-bottom:6px">Donors</div>
+              <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:8px">
+                <div style="background:white;border-radius:6px;padding:10px;border:1px solid #e2e8f0">
+                  <div style="font-size:9px;color:#64748b;margin-bottom:3px">Total Donors</div>
+                  <div style="font-size:16px;font-weight:700;color:#334155">84</div>
+                  <div style="font-size:9px;color:#94a3b8">in database</div>
+                  <div style="font-size:8px;color:#94a3b8;margin-top:3px">View →</div>
+                </div>
+                <div style="background:white;border-radius:6px;padding:10px;border:1px solid #e2e8f0">
+                  <div style="font-size:9px;color:#64748b;margin-bottom:3px">Active Donors</div>
+                  <div style="font-size:16px;font-weight:700;color:#059669">57</div>
+                  <div style="font-size:9px;color:#94a3b8">gave this year</div>
+                  <div style="font-size:8px;color:#94a3b8;margin-top:3px">View →</div>
+                </div>
+                <div style="background:white;border-radius:6px;padding:10px;border:1px solid #e2e8f0;border-top:3px solid #f59e0b">
+                  <div style="font-size:9px;color:#64748b;margin-bottom:3px">LYBUNT</div>
+                  <div style="font-size:16px;font-weight:700;color:#d97706">14</div>
+                  <div style="font-size:9px;color:#d97706">need outreach</div>
+                  <div style="font-size:8px;color:#94a3b8;margin-top:3px">View →</div>
+                </div>
+                <div style="background:white;border-radius:6px;padding:10px;border:1px solid #e2e8f0;border-top:3px solid #dc2626">
+                  <div style="font-size:9px;color:#64748b;margin-bottom:3px">SYBUNT</div>
+                  <div style="font-size:16px;font-weight:700;color:#dc2626">8</div>
+                  <div style="font-size:9px;color:#94a3b8">lapsed</div>
+                  <div style="font-size:8px;color:#94a3b8;margin-top:3px">View →</div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- Footer strip -->
+        <div style="background:#f1f5f9;padding:10px 20px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px;border-top:1px solid #e2e8f0">
+          <span style="font-size:11px;color:#64748b">Dashboard · Donors · Gift Log · Moves Management · Grant Tracker · Board Reports · Engagement Scores</span>
+          <a href="https://donordesk.gumroad.com/l/pro" target="_blank" rel="noopener" style="font-size:12px;font-weight:700;color:var(--navy);text-decoration:none">Start free month →</a>
+        </div>
+      </div>
+
+    </div><!-- /section-inner -->
+  </div><!-- /features -->
+</section>
+
+<!-- PRICING -->
+<section class="pricing" id="pricing">
+  <div class="section-inner">
+    <div class="section-label reveal">Simple pricing</div>
+    <h2 class="section-title reveal reveal-delay-1">Three versions. One right fit.</h2>
+    <p class="section-sub reveal reveal-delay-2">Start with what you need. Upgrade when you're ready. No lock-in.</p>
+    <div class="pricing-grid">
+
+      <div class="pricing-card reveal">
+        <div class="pricing-badge">Starter</div>
+        <div class="pricing-price">$19</div>
+        <div class="pricing-period">one-time purchase</div>
+        <div class="pricing-desc">For brand-new nonprofits that need a simple, clean donor tracker and nothing more.</div>
+        <ul class="pricing-features">
+          <li>Donor List with contact info</li>
+          <li>Gift Log with acknowledgment tracking</li>
+          <li>Total Giving — auto-calculated</li>
+          <li>Last Gift Date — auto-calculated</li>
+          <li>IRS compliance for gifts $250+</li>
+          <li>Plain-English Start Here guide</li>
+          <li>Google Sheets (free) or Excel</li>
+        </ul>
+        <a href="https://donordesk.gumroad.com/l/starter" target="_blank" rel="noopener" class="pricing-btn">Get Starter →</a>
+      </div>
+
+      <div class="pricing-card pricing-featured reveal reveal-delay-1">
+        <div class="pricing-badge">Standard</div>
+        <div class="pricing-price">$39</div>
+        <div class="pricing-period">one-time purchase</div>
+        <div class="pricing-desc">The complete system for growing nonprofits managing donors, grants, and board reporting.</div>
+        <ul class="pricing-features">
+          <li>Everything in Starter, plus:</li>
+          <li>5-tab system — Donor Database, Gift Log, Moves Management, Grant Tracker, Board Dashboard</li>
+          <li>Status auto-calculated (Active / Last Year But Unfortunately Not This Year (LYBUNT) / Some Year But Unfortunately Not This Year (SYBUNT))</li>
+          <li>Cultivation pipeline with color-coded deadlines</li>
+          <li>Grant deadline alerts</li>
+          <li>Year-over-year (YOY) board dashboard — print-ready</li>
+          <li>Google Sheets (free) or Excel</li>
+        </ul>
+        <a href="https://donordesk.gumroad.com/l/standard" target="_blank" rel="noopener" class="pricing-btn">Get Standard →</a>
+      </div>
+
+      <div class="pricing-card reveal reveal-delay-2">
+        <div class="pricing-badge">Pro</div>
+        <div class="pricing-price">$15<span style="font-size:16px;font-weight:400">/mo</span></div>
+        <div class="pricing-period">or $99/year — save 45%</div>
+        <div class="pricing-desc">A full web app for teams that need multi-user access and real-time cloud sync across all devices.</div>
+        <div style="background:#e0e7ff;border-radius:8px;padding:10px 14px;margin:14px 0;text-align:center">
+          <p style="font-size:13px;font-weight:700;color:#1e40af;margin-bottom:2px">First month free</p>
+          <p style="font-size:11px;color:#3730a3">No credit card required. Cancel any time.</p>
+        </div>
+        <ul class="pricing-features">
+          <li>Everything in Standard, plus:</li>
+          <li>Web app — works on any device</li>
+          <li>Multi-user — unlimited teammates</li>
+          <li>Real-time cloud sync</li>
+          <li>Board Reports with 3 auto-updating charts</li>
+          <li>Engagement scoring A–D</li>
+          <li>Built-in Help &amp; FAQ (38 questions)</li>
+        </ul>
+        <a href="https://donordesk.gumroad.com/l/pro" target="_blank" rel="noopener" class="pricing-btn pricing-btn-outline">Start Free Trial →</a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- TRUST -->
+<section class="trust" id="testimonials">
+  <div class="section-inner">
+    <div class="section-label reveal">Early access</div>
+    <h2 class="section-title reveal reveal-delay-1">Be one of the first nonprofits in.</h2>
+    <p class="section-sub reveal reveal-delay-2">DonorDesk is newly launched. We're offering free copies and a free first month to a small number of nonprofits in exchange for honest feedback. No strings attached.</p>
+
+    <div class="trust-grid reveal" style="margin-bottom:24px">
+      <div class="trust-card">
+        <div class="trust-stars">🎯</div>
+        <h3 style="font-size:15px;font-weight:700;color:var(--navy);margin-bottom:10px">Free copy — Starter or Standard</h3>
+        <p>We're giving away free copies of DonorDesk to nonprofits currently managing donors in a spreadsheet and looking for something better.</p>
+        <p style="margin-top:10px;font-size:13px;color:var(--navy);font-weight:600">Under one year old? You'll get Starter.</p>
+        <p style="margin-top:4px;font-size:13px;color:var(--navy);font-weight:600">Operating for a year or more? You'll get Standard.</p>
+        <p style="margin-top:12px;font-size:13px;color:var(--gray-400)">Email <strong style="color:var(--navy)">donordesk2@gmail.com</strong> with one sentence about your organization.</p>
+      </div>
+      <div class="trust-card">
+        <div class="trust-stars">💬</div>
+        <h3 style="font-size:15px;font-weight:700;color:var(--navy);margin-bottom:10px">What we ask in return</h3>
+        <p>Use it for a month. Tell us honestly what works and what doesn't. If it helps your fundraising, leave a review so other new and small nonprofits can find it.</p>
+        <p style="margin-top:10px;font-size:13px;color:var(--gray-400)">That's it. No obligation, no upsell, no follow-up pitch.</p>
+      </div>
+      <div class="trust-card">
+        <div class="trust-stars">✅</div>
+        <h3 style="font-size:15px;font-weight:700;color:var(--navy);margin-bottom:10px">Who qualifies</h3>
+        <p>Any nonprofit currently tracking donors in a spreadsheet — or not tracking them at all. If you need a simple, organized way to manage donor relationships and giving history, this was built for you.</p>
+        <p style="margin-top:10px;font-size:13px;color:var(--gray-400)">Brand new or a few years in — reach out if you're doing real fundraising work and want a better system.</p>
+      </div>
+    </div>
+
+    <div class="reveal" style="background:var(--navy);border-radius:12px;padding:32px 36px;display:flex;align-items:center;justify-content:space-between;gap:32px;flex-wrap:wrap">
+      <div style="flex:1;min-width:260px">
+        <div style="font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--gold);margin-bottom:8px">DonorDesk Pro</div>
+        <h3 style="font-family:'Playfair Display',serif;font-size:20px;color:white;margin-bottom:8px">Your first month is free.</h3>
+        <p style="font-size:14px;color:rgba(255,255,255,.65);line-height:1.7;margin-bottom:0">If your team needs multi-user access and real-time cloud sync, try DonorDesk Pro with no commitment. No credit card required. After your free month it's $15/month or $99/year — cancel any time.</p>
+      </div>
+      <div style="flex-shrink:0;text-align:center">
+        <a href="https://donordesk.gumroad.com/l/pro" target="_blank" rel="noopener" style="display:inline-block;background:var(--gold);color:var(--navy);font-size:14px;font-weight:700;padding:14px 28px;border-radius:8px;text-decoration:none;white-space:nowrap">Start Free Month →</a>
+        <p style="font-size:11px;color:rgba(255,255,255,.35);margin-top:8px">No credit card required</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="about" id="about">
+  <div class="section-inner">
+    <div class="about-grid">
+      <div class="about-card reveal">
+        <h3>Ethan K.</h3>
+        <div class="role">Nonprofit Fundraising Professional</div>
+      </div>
+      <div class="about-content reveal reveal-delay-1">
+        <div class="section-label">About</div>
+        <h2 class="section-title">Built by someone who's done this work.</h2>
+        <p>I've spent over a decade working across nonprofits in roles from Associate Director of Advancement to Executive Director to Development Director. I've done the full spectrum — grant writing, major gifts, annual fund campaigns, board relations.</p>
+        <p>Across every organization I've worked for, the same problem kept showing up: donor software was either too expensive to justify, too complicated to actually use, or both. Most small development offices were running on spreadsheets they built themselves and hoping nothing fell through the cracks.</p>
+        <p>I built DonorDesk because I got tired of waiting for someone else to solve it. Every field, formula, and alert in this product came from something I personally needed on the job.</p>
+        <p class="about-tagline">Built by a fundraiser, for fundraisers.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="faq" id="faq">
+  <div class="section-inner">
+    <div class="section-label reveal">Questions</div>
+    <h2 class="section-title reveal reveal-delay-1">Frequently asked questions</h2>
+    <div class="faq-grid">
+      <div class="faq-item reveal">
+        <div class="faq-q">What's the difference between Starter, Standard, and Pro?</div>
+        <div class="faq-a">Starter is a 2-tab Google Sheets file — donor list and gift log. Standard is a 5-tab system that adds Moves Management, Grant Tracker, and a Board Dashboard. Pro is a full web app with multi-user access, real-time cloud sync, and board report charts. All three include the same core donor tracking; they differ in depth and delivery format.</div>
+      </div>
+      <div class="faq-item reveal reveal-delay-1">
+        <div class="faq-q">Do I need to know Excel or Google Sheets to use this?</div>
+        <div class="faq-a">No. The formulas and calculations are already built in. You just type into cells — the system does the math. Each file includes a plain-English Start Here guide that explains every column and every term.</div>
+      </div>
+      <div class="faq-item reveal">
+        <div class="faq-q">Can multiple people use the same file?</div>
+        <div class="faq-a">For Starter and Standard: you can share the Google Sheet with teammates the same way you'd share any Google file. For Pro: multi-user access is built in — your whole team logs into the same shared database simultaneously with their own accounts.</div>
+      </div>
+      <div class="faq-item reveal reveal-delay-1">
+        <div class="faq-q">Is my data safe in DonorDesk Pro?</div>
+        <div class="faq-a">Yes. Pro is powered by Google Firebase — the same infrastructure used by major enterprise applications. Your organization's data is completely private and separate from every other organization. Auto sign-out activates after 60 minutes of inactivity.</div>
+      </div>
+      <div class="faq-item reveal">
+        <div class="faq-q">What happens to my data if I cancel Pro?</div>
+        <div class="faq-a">Before cancelling, go to Settings → Export Backup to download a complete JSON file of all your donors, gifts, moves, and grants. Your data is always yours. We recommend exporting a backup monthly regardless.</div>
+      </div>
+      <div class="faq-item reveal reveal-delay-1">
+        <div class="faq-q">Can I upgrade from Starter or Standard to Pro later?</div>
+        <div class="faq-a">Yes. Pro is a separate product — you can start it anytime. Your existing spreadsheet data can be manually entered into Pro, or you can run both in parallel during a transition period.</div>
+      </div>
+      <div class="faq-item reveal">
+        <div class="faq-q">Do I need a Gmail address to use Pro?</div>
+        <div class="faq-a">No. Any email address works — your work email, a personal email, whatever you prefer. Google Sign-In is available as an option but not required.</div>
+      </div>
+      <div class="faq-item reveal reveal-delay-1">
+        <div class="faq-q">How do I get support if I have a question?</div>
+        <div class="faq-a">Email donordesk2@gmail.com — responses within 3 business days. DonorDesk Pro also has a built-in Help &amp; FAQ section with 38 answered questions, searchable in real time.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CLOSING CTA -->
+<section class="cta-final">
+  <div class="section-inner" style="text-align:center">
+    <div class="section-label reveal">Get started</div>
+    <h2 class="section-title reveal reveal-delay-1" style="color:white">You don't need enterprise software.<br>You need the right tool for where you are.</h2>
+    <p class="section-sub reveal reveal-delay-2" style="color:rgba(255,255,255,.6)">That's DonorDesk.</p>
+    <div class="reveal reveal-delay-3" style="display:flex;gap:16px;justify-content:center;flex-wrap:wrap;margin-top:36px">
+      <a href="https://donordesk.gumroad.com/l/starter" target="_blank" rel="noopener" class="btn-cta-outline">Get Starter — $19</a>
+      <a href="https://donordesk.gumroad.com/l/standard" target="_blank" rel="noopener" class="btn-cta-primary">Get Standard — $39</a>
+      <a href="https://donordesk.gumroad.com/l/pro" target="_blank" rel="noopener" class="btn-cta-outline">Start Pro Free →</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-logo">Donor<span>Desk</span></div>
+    <div class="footer-links">
+      <a href="#features">Features</a>
+      <a href="#pricing">Pricing</a>
+      <a href="#about">About</a>
+      <a href="#faq">FAQ</a>
+      <a href="https://donordesk.gumroad.com/l/standard" target="_blank" rel="noopener">Buy Now</a>
+    </div>
+  </div>
+  <div class="footer-copy">© <span id="copy-year">2026</span> DonorDesk. Built by a fundraiser, for fundraisers.</div>
+</footer>
+
+<script>
+// Auto-update copyright year
+document.getElementById('copy-year').textContent = new Date().getFullYear();
+
+// Scroll reveal
+const revealEls = document.querySelectorAll('.reveal');
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+      observer.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.1 });
+revealEls.forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
